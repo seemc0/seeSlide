@@ -29,9 +29,15 @@ function initDiscs(){
       } else {
         $("#debug").append("Animating, request ignored");
       }
-      
     });
   }
+  
+  //Position discs
+  var slideCenter = parseInt($("#slideshow").css("width"))/2;
+  var discsCenter = parseInt($("#slideDiscs").css("width"))/2;
+  slideCenter = slideCenter - discsCenter;
+  slideCenter += "px";
+  $("#slideDiscs").css("left", slideCenter);
 }
 
 function initSlideImgs(){
@@ -39,7 +45,8 @@ function initSlideImgs(){
   $("#slideshow img").css("left", "800px");
   //Place the current image (should be 0) in the viewport
   $("#slideshow img").eq(currentImage).css("left", "0px");
-  $("#slideDiscs li").eq(currentImage).css("color", "white");
+  $("#slideDiscs li").eq(currentImage).addClass("selected");
+  //$("#slideDiscs li").eq(currentImage).css("color", "white");
 }
 
 
@@ -80,7 +87,9 @@ function showNextImage(forcedImage){
     $("#slideshow img").eq(currentImage).css("left", "0px");
     //set the appropriate disc to filled
     $("#slideDiscs li").css("color", "");
-    $("#slideDiscs li").eq(currentImage).css("color", "white");
+    //$("#slideDiscs li").eq(currentImage).css("color", "white");
+    $("#slideDiscs li").removeClass("selected");
+    $("#slideDiscs li").eq(currentImage).addClass("selected");
     //Finished the animation, accept clicks again.
     animating = false;
     resetTimer();
@@ -94,6 +103,8 @@ function showNextImage(forcedImage){
   
   
 }
+
+
 
 $(function(){
   initDiscs();
