@@ -1,0 +1,39 @@
+#slideshow {
+  width: 800px;
+  height: 400px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #ddd;
+  position: relative;
+  overflow: hidden;
+  
+}
+
+#slideshow img {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+}
+
+#debug {
+}
+
+#slideshow .currentImg {
+  
+}
+
+ul#slideDiscs {
+  top: 300px;
+  left: 50px;
+  display: block;
+  position: relative;
+  z-index: 20;
+}
+
+ul#slideDiscs li {
+  font-size: 30px;
+  list-style: circle;
+  float: left;
+  padding-right: 25px;
+}
