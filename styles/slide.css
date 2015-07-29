@@ -1,6 +1,6 @@
 #slideshow {
   width: 800px;
-  height: 400px;
+  height: 350px;
   margin: 0 auto;
   text-align: center;
   background-color: #ddd;
@@ -24,16 +24,20 @@
 }
 
 ul#slideDiscs {
-  top: 300px;
-  left: 50px;
-  display: block;
+  display: table;
   position: relative;
   z-index: 20;
+  top: 80%;
 }
 
 ul#slideDiscs li {
-  font-size: 30px;
+  font-size: 35px;
   list-style: circle;
   float: left;
   padding-right: 25px;
+}
+
+ul#slideDiscs li.selected {
+  list-style: disc;
+  color: white;
 }
