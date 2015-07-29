@@ -1,3 +1,7 @@
+body {
+  background-color: #424647;
+}
+
 #slideshow {
   width: 800px;
   height: 350px;
@@ -6,7 +10,6 @@
   background-color: #ddd;
   position: relative;
   overflow: hidden;
-  
 }
 
 #slideshow img {
@@ -31,13 +34,14 @@ ul#slideDiscs {
 }
 
 ul#slideDiscs li {
-  font-size: 35px;
+  font-size: 38px;
   list-style: circle;
+  color: #0797da;
   float: left;
-  padding-right: 25px;
+  padding-right: 35px;
 }
 
 ul#slideDiscs li.selected {
   list-style: disc;
-  color: white;
+  color: #6cc3eb;
 }
