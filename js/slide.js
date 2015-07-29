@@ -20,7 +20,7 @@ function initDiscs(){
   var discs = $("<ul id='slideDiscs'></ul>");
   config.numSliders = $("#slideshow img").length;
   for (i = 0; i<config.numSliders; i++){
-    discs.append("<li data-ref='" + i + "'> </li>");
+    discs.append("<a href='#'><li data-ref='" + i + "'> </li></a>");
   }
   $("#slideshow").prepend(discs);
   for (i = 0; i<config.numSliders; i++){
