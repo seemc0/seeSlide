@@ -4,6 +4,8 @@ var slideTimer = 0;
 var slideDuration = 3000;
 var nextImage = 0;
 var animating = false;
+var slideOnDuration = 1000;
+var slideOffDuration= 2500;
 
 function resetTimer(){
       clearInterval(slideTimer);
@@ -26,8 +28,6 @@ function initDiscs(){
         //Otherwise show the next image
         showNextImage(forcedImage);
         resetTimer();
-      } else {
-        $("#debug").append("Animating, request ignored");
       }
     });
   }
@@ -42,9 +42,16 @@ function initDiscs(){
 
 function initSlideImgs(){
   //Place all images to the right of the viewport
-  $("#slideshow img").css("left", "800px");
+  var slideWidth = parseInt($("#slideshow").css("width"));
+  $("#slideshow img").css({
+      left:  slideWidth + "px",
+      zIndex: 1
+      });
   //Place the current image (should be 0) in the viewport
-  $("#slideshow img").eq(currentImage).css("left", "0px");
+  $("#slideshow img").eq(currentImage).css({
+      left: "0px",
+      zIndex: 2
+      });
   $("#slideDiscs li").eq(currentImage).addClass("selected");
   //$("#slideDiscs li").eq(currentImage).css("color", "white");
 }
@@ -62,45 +69,51 @@ function showNextImage(forcedImage){
   } else {
     //if the user has chosen the currently displayed image, ignore the request.
     if (forcedImage == currentImage){
-      $("#debug").append("Forced Image same as Current, request ignored");
       return;
     }
     //Otherwise, set the next Image as the forced image
     nextImage = parseInt(forcedImage);
   }
   
-
-  
-  
-  $("#debug").append("Next Image: " + nextImage + "<br />");
-
-  ///Place next image off to the right - this will be unnecessary when the end animate function calls the move of all images to the right
-  //$("#slideshow img").eq(nextImage).css("left", "800px");
-  //Animate current image to the left;
-  $("#slideshow img").eq(currentImage).animate({left: "-800px"}, 1000);
-  
-  //animate next image to the viewport from the right
-  $("#slideshow img").eq(nextImage).animate({left: "0px"}, 1000, function(){
+      $("#slideshow img").eq(currentImage).css("z-index", 1);
+      $("#slideshow img").eq(nextImage).css("z-index", 2);
+      var slideWidth = parseInt($("#slideshow").css("width"));
+      slideWidth += "px";
     //place all Images just off to the right
-    $("#slideshow img").css("left", "800px");
+    $("#slideshow img").css("left", slideWidth);
     //re-place current image in the viewport
     $("#slideshow img").eq(currentImage).css("left", "0px");
+  
+  
+  //Animate current image to the left;
+
+  $("#slideshow img").eq(currentImage).animate({left: "-"+slideWidth}, slideOffDuration, function(){
+      
+      });
+  
+  //animate next image to the viewport from the right
+  $("#slideshow img").eq(nextImage).animate({left: "0px"}, slideOnDuration, function(){
+
     //set the appropriate disc to filled
     $("#slideDiscs li").css("color", "");
     //$("#slideDiscs li").eq(currentImage).css("color", "white");
     $("#slideDiscs li").removeClass("selected");
-    $("#slideDiscs li").eq(currentImage).addClass("selected");
+    $("#slideDiscs li").eq(nextImage).addClass("selected");
+      $("#slideshow img").eq(currentImage).finish();
+      //place all Images just off to the right
+      $("#slideshow img").css("left", slideWidth);
+      //end slideOff animation
+      //re-place current image in the viewport
+      $("#slideshow img").eq(nextImage).css("left", "0px");      
+    
+    //set the current image to the image that has just filled the viewport
+    currentImage = parseInt(nextImage);
     //Finished the animation, accept clicks again.
     animating = false;
     resetTimer();
     
   } );
-    //set the current image to the image that has just filled the viewport
-    currentImage = parseInt(nextImage);
-    $("#debug").append("Current: " + currentImage + "<br />");
 
-  
-  
   
 }
 
