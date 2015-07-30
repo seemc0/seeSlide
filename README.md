@@ -35,6 +35,8 @@ Create a div with an id of "seeSlide" and populate it with your slide show image
 </div>
 ```
 
+seeSlide will automatically set up your slide show based on the number of images contained in the seeSlide div.
+
 #That's it
 
 There are some config options in the seeSlide.js file, which you can change to suit the look and feel of your project. Also, the seeSlide.css file contains the styles for the navigation arrows and discs. At the moment, these are just basic html elements: left-and-right-angled quotes (&laquo; and &raquo;) for the arrows and disc-and-circle style list items for the discs.
