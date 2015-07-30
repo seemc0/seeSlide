@@ -25,7 +25,7 @@ function initDiscs(){
   $("#slideshow").prepend(discs);
   for (i = 0; i<config.numSliders; i++){
     //If a disc is clicked
-    $("#slideDiscs li").eq(i).on("click", function(){
+    $("#slideshow #slideDiscs li").eq(i).on("click", function(){
       var forcedImage = $(this).attr("data-ref");
       //If the slideshow is in the process of animating, ignore the request.
       if (config.animating == false) {
@@ -38,10 +38,10 @@ function initDiscs(){
   
   //Position discs
   var slideCenter = parseInt($("#slideshow").css("width"))/2;
-  var discsCenter = parseInt($("#slideDiscs").css("width"))/2;
+  var discsCenter = parseInt($("#slideshow #slideDiscs").css("width"))/2;
   slideCenter = slideCenter - discsCenter;
   slideCenter += "px";
-  $("#slideDiscs").css("left", slideCenter);
+  $("#slideshow #slideDiscs").css("left", slideCenter);
 }
 
 function initSlideImgs(){
@@ -99,10 +99,9 @@ function showNextImage(forcedImage){
   $("#slideshow img").eq(config.nextImage).animate({left: "0px"}, config.slideOnDuration, function(){
 
     //set the appropriate disc to filled
-    $("#slideDiscs li").css("color", "");
-    //$("#slideDiscs li").eq(currentImage).css("color", "white");
-    $("#slideDiscs li").removeClass("selected");
-    $("#slideDiscs li").eq(config.nextImage).addClass("selected");
+    $("#slideshow #slideDiscs li").css("color", "");
+    $("#slideshow #slideDiscs li").removeClass("selected");
+    $("#slideshow #slideDiscs li").eq(config.nextImage).addClass("selected");
       $("#slideshow img").eq(config.currentImage).finish();
       //place all Images just off to the right
       $("#slideshow img").css("left", slideWidth);
@@ -121,9 +120,13 @@ function showNextImage(forcedImage){
 }
 
 
+function initArrows(){
+  
+}
 
 $(function(){
   initDiscs();
+  initArrows();
   initSlideImgs();
   slideTimer = setInterval(showNextImage, config.slideDuration);
 });
