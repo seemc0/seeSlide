@@ -1,6 +1,7 @@
 # seeSlide.js
 
 A lightweight JavaScript & jQuery carousel-style slide show.
+Demo: www.gravitymedia.co.za/seeSlide/
 
 Please feel free to use and manipulate this code. I don't require any attribution, but a mention in your code comments would be great. I take no responsibility for how seeSlide will react with your project, so use it at your own risk.
 
