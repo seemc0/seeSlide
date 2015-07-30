@@ -121,7 +121,34 @@ function showNextImage(forcedImage){
 
 
 function initArrows(){
-  
+      var arrows = $('<div id="arrows"><a href="#" id="slideLeftArrow">&laquo;</a><a href="#" id="slideRightArrow">&raquo;</a></div>');
+      $("#slideshow").prepend(arrows);
+      $("#slideshow #arrows a").on("mousemove", function(){
+            $(this).css("opacity", 0.6);
+      });
+      
+      $("#slideshow #arrows a").on("mouseleave", function(){
+            $(this).css("opacity", "");
+      });
+      
+      $("#slideshow #arrows #slideLeftArrow").on("click", function(){
+            if (config.animating == false) {
+                  var prevImage = config.currentImage - 1;
+                  if (prevImage<0){
+                        prevImage = (config.numSliders - 1);
+                  }
+                  showNextImage(prevImage);
+                  resetTimer();
+            }
+      });
+      
+      
+      $("#slideshow #arrows #slideRightArrow").on("click", function(){
+            if (config.animating == false) {
+                  showNextImage();
+                  resetTimer();
+            }
+      });
 }
 
 $(function(){
